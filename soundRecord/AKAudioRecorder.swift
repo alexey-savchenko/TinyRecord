@@ -23,7 +23,7 @@ public class AKAudioRecorder {
   
   
   
-  private var internalRecorder: AVAudioRecorder
+  var internalRecorder: AVAudioRecorder
   
   
   
@@ -36,8 +36,6 @@ public class AKAudioRecorder {
   ///
   
   public init(_ file: String) {
-    
-   // let url = NSURL.fileURL(withPath: file, isDirectory: false)
     
     let fileManager = FileManager.default
     let urls = fileManager.urls(for: .documentDirectory, in: .userDomainMask)

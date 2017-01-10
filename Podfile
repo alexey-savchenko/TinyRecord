@@ -7,4 +7,5 @@ target 'soundRecord' do
 
   # Pods for soundRecord
 	pod 'AudioKit', '~> 3.5'
+pod 'EZAudio', '~> 1.1.4'
 end

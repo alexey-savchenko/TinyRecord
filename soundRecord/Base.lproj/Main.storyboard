@@ -1,83 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="2zK-t8-zGA">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--MiniDict-->
-        <scene sceneID="tne-QT-ifu">
+        <!--View Controller-->
+        <scene sceneID="51W-7e-BKv">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="soundRecord" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="2zK-t8-zGA" customClass="ViewController" customModule="TinyRecord" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                        <viewControllerLayoutGuide type="top" id="jZM-c9-eGr"/>
+                        <viewControllerLayoutGuide type="bottom" id="MV1-Bl-gfP"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                    <view key="view" contentMode="scaleToFill" id="Aw8-Ck-Y6l">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Microphone-Free-Download-PNG" translatesAutoresizingMaskIntoConstraints="NO" id="auI-Qr-eRM">
-                                <rect key="frame" x="87" y="28" width="201" height="201"/>
+                            <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="j9V-qF-8mt" customClass="EZAudioPlot">
+                                <rect key="frame" x="16" y="20" width="343" height="200"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Audio plot" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hk0-8J-jjd">
+                                        <rect key="frame" x="8" y="8" width="78" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.66663921374076163" green="0.67323960199562061" blue="0.67323960199562061" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.96099400418877567" green="0.97050879630945663" blue="0.97050879630945663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="201" id="e9v-SW-bjm"/>
-                                    <constraint firstAttribute="height" constant="201" id="iuA-bC-zdX"/>
+                                    <constraint firstAttribute="height" constant="200" id="HaU-i7-yhd"/>
+                                    <constraint firstItem="Hk0-8J-jjd" firstAttribute="top" secondItem="j9V-qF-8mt" secondAttribute="top" constant="8" id="O5l-Lp-9nv"/>
+                                    <constraint firstItem="Hk0-8J-jjd" firstAttribute="leading" secondItem="j9V-qF-8mt" secondAttribute="leading" constant="8" id="Uo8-Ac-dPn"/>
                                 </constraints>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3qA-y4-pL6">
-                                <rect key="frame" x="16" y="296" width="141" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
+                                        <color key="value" red="0.96078431372549022" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="55e-zY-7el">
+                                <rect key="frame" x="16" y="228" width="95" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="95" id="A7Z-Dq-2GU"/>
+                                    <constraint firstAttribute="height" constant="30" id="LYw-Pu-eV5"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="15"/>
                                 <state key="normal" title="Record"/>
                                 <connections>
-                                    <action selector="record:" destination="BYZ-38-t0r" eventType="touchUpInside" id="luU-bv-KJq"/>
+                                    <action selector="record:" destination="2zK-t8-zGA" eventType="touchUpInside" id="lKZ-iw-Isn"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wpM-2W-oOA">
-                                <rect key="frame" x="186" y="296" width="32" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Stop"/>
-                                <connections>
-                                    <action selector="stop:" destination="BYZ-38-t0r" eventType="touchUpInside" id="crb-Ou-X1i"/>
-                                </connections>
-                            </button>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qre-CB-ZI4" customClass="EZAudioPlot">
-                                <rect key="frame" x="61" y="363" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dfl-wP-JXV">
-                                <rect key="frame" x="329" y="296" width="30" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BLc-sJ-Nrc">
+                                <rect key="frame" x="119" y="228" width="95" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="95" id="XUu-9P-alU"/>
+                                    <constraint firstAttribute="height" constant="30" id="cHK-d2-Hrk"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="15"/>
                                 <state key="normal" title="Play"/>
                                 <connections>
-                                    <action selector="play:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dAm-zW-U7Y"/>
+                                    <action selector="play:" destination="2zK-t8-zGA" eventType="touchUpInside" id="mQy-FS-i6i"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <gestureRecognizers/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="auI-Qr-eRM" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="YcD-ym-SqT"/>
-                            <constraint firstItem="auI-Qr-eRM" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="gBN-R1-taK"/>
+                            <constraint firstItem="BLc-sJ-Nrc" firstAttribute="top" secondItem="j9V-qF-8mt" secondAttribute="bottom" constant="8" id="EdO-zk-2b1"/>
+                            <constraint firstItem="j9V-qF-8mt" firstAttribute="top" secondItem="jZM-c9-eGr" secondAttribute="bottom" id="L9o-KY-EMF"/>
+                            <constraint firstItem="j9V-qF-8mt" firstAttribute="trailing" secondItem="Aw8-Ck-Y6l" secondAttribute="trailingMargin" id="fQO-1G-e8i"/>
+                            <constraint firstItem="55e-zY-7el" firstAttribute="leading" secondItem="Aw8-Ck-Y6l" secondAttribute="leadingMargin" id="gTf-Qm-kAw"/>
+                            <constraint firstItem="j9V-qF-8mt" firstAttribute="leading" secondItem="Aw8-Ck-Y6l" secondAttribute="leadingMargin" id="hWg-NL-hQf"/>
+                            <constraint firstItem="55e-zY-7el" firstAttribute="top" secondItem="j9V-qF-8mt" secondAttribute="bottom" constant="8" id="jdh-oE-fHF"/>
+                            <constraint firstItem="BLc-sJ-Nrc" firstAttribute="leading" secondItem="55e-zY-7el" secondAttribute="trailing" constant="8" id="zcF-uE-ze1"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="MiniDict" id="gIE-EG-6M1"/>
                     <connections>
-                        <outlet property="audioPlot" destination="Qre-CB-ZI4" id="x9D-xR-XbJ"/>
-                        <outlet property="playButton" destination="dfl-wP-JXV" id="Yxh-dM-UQT"/>
-                        <outlet property="recordButton" destination="3qA-y4-pL6" id="q7E-hq-05F"/>
+                        <outlet property="playAudioPlot" destination="j9V-qF-8mt" id="moN-BB-f8s"/>
+                        <outlet property="playButton" destination="BLc-sJ-Nrc" id="tvs-7l-3HY"/>
+                        <outlet property="recButton" destination="55e-zY-7el" id="ztR-ne-pcD"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DO6-Xz-BkM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1076" y="138.98050974512745"/>
+            <point key="canvasLocation" x="1941.5999999999999" y="138.98050974512745"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="Microphone-Free-Download-PNG" width="400" height="400"/>
-    </resources>
 </document>

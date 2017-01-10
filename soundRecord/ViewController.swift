@@ -1,121 +1,114 @@
 //
-//  ViewController.swift
+//  secViewController.swift
 //  soundRecord
 //
-//  Created by Alexey Savchenko on 05.01.17.
+//  Created by Alexey Savchenko on 10.01.17.
 //  Copyright © 2017 Alexey Savchenko. All rights reserved.
 //
 
 import UIKit
-import AudioKit
+import AVFoundation
 
-class ViewController: UIViewController {
+
+
+class ViewController: UIViewController, EZAudioPlayerDelegate {
   
-  @IBOutlet weak var audioPlot: EZAudioPlot!
+  
+  //MARK: Properities
+  var microphone = EZMicrophone()
+  var player = EZAudioPlayer()
+  var recorder = AKAudioRecorder("demo")
+  
+		
+  //MARK: Outlets
+  @IBOutlet weak var recButton: UIButton!
+  @IBOutlet weak var playAudioPlot: EZAudioPlot!
   @IBOutlet weak var playButton: UIButton!
-  @IBOutlet weak var recordButton: UIButton!
   
-  let fileName = "recordedFile"
-  var recorder = AKAudioRecorder("recordedFile")
-
-  
-  var count = 0
   
   override func viewDidLoad() {
     super.viewDidLoad()
-  }
-  @IBAction func record(_ sender: UIButton) {
-    count += 1
-    recorder.record()
-    check()
-  }
-  
-  func check(){
-    let fileManager = FileManager.default
-    let urls = fileManager.urls(for: .documentDirectory, in: .userDomainMask)
-    let documentDirectory = urls[0] as NSURL
-    let soundURL = documentDirectory.appendingPathComponent(fileName)?.path
-    
-    if fileManager.fileExists(atPath: soundURL!){
-      print("file exists: \(soundURL)")
-    } else {
-      print("file does not exist")
-    }
-  }
-  
-  @IBAction func stop(_ sender: UIButton) {
-    recorder.stop()
-  }
-  @IBAction func play(_ sender: UIButton) {
+    playButton.isEnabled = false
     
     do{
-      let fileManager = FileManager.default
-      let urls = fileManager.urls(for: .documentDirectory, in: .userDomainMask)
-      let documentDirectory = urls[0] as NSURL
-      let soundURL = documentDirectory.appendingPathComponent(fileName)
+      let session = AVAudioSession.sharedInstance()
+      try session.setCategory("AVAudioSessionCategoryPlayAndRecord")
+      try session.setActive(true)
       
-      let tempPlayer = try AKAudioPlayer(file: try AKAudioFile(forReading: soundURL!))
+      self.playAudioPlot.color = UIColor.orange
+      self.playAudioPlot.shouldMirror = true
+      self.playAudioPlot.shouldFill = true
+      self.playAudioPlot.plotType = .rolling
+      self.playAudioPlot.gain = 6.0
       
-      AudioKit.output = tempPlayer
-      AudioKit.start()
+      self.player = EZAudioPlayer(delegate: self)
       
-      tempPlayer.play()
-      
-      let plot = AKNodeOutputPlot(tempPlayer, frame: audioPlot.bounds)
-      plot.plotType = .buffer
-      plot.shouldFill = true
-      plot.shouldMirror = true
-      plot.color = UIColor.blue
-      audioPlot.addSubview(plot)
-      
-      
-      
-      if tempPlayer.isStarted {
-        print("Player started playing")
-      }
-      if tempPlayer.isPlaying{
-        print("PLaying sound")
-      }
-      
-      if tempPlayer.isStopped{
-        print("Player stopped")
-      }
+      try session.overrideOutputAudioPort(AVAudioSessionPortOverride.speaker)
       
     } catch {
       print(error.localizedDescription)
     }
+  }
+  
+  //MARK: Playback implementation
+  
+  @IBAction func play(_ sender: UIButton) {
     
+    playButton.isEnabled = false
     
-//    if sender.titleLabel?.text == "Play"{
-//      playButton.titleLabel?.text = "Stop"
-//      do {
-//        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
-//        let path = paths[0] + "recordedFile"
-//        let filePath = URL(fileURLWithPath: path)
-//        let player = try AKAudioPlayer(file: try AKAudioFile(forReading: filePath))
-//        
-//        AudioKit.output = player
-//        AudioKit.start()
-//        player.play()
-//      } catch{
-//        print(error.localizedDescription)
-//      }
-//    } else{
-//      playButton.titleLabel?.text = "Play"
-//      do {
-//        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
-//        let path = paths[0] + "recordedFile"
-//        let filePath = URL(fileURLWithPath: path)
-//        let player = try AKAudioPlayer(file: try AKAudioFile(forReading: filePath))
-//        player.stop()
-//      } catch{
-//        print(error.localizedDescription)
-//      }
-//    }
+    self.playAudioPlot.clear()
+    
+    let audiofile = EZAudioFile(url: ViewController.URLforRecord())
+    
+    self.player.playAudioFile(audiofile)
+    
+  }
+  
+  //MARK: Recording implementation
+  
+  @IBAction func record(_ sender: UIButton) {
+    
+    if recButton.titleLabel?.text == "Record"{
+      playButton.isEnabled = false
+      
+      recButton.setTitle("Stop", for: .normal)
+      recorder.record()
+      
+    } else {
+      
+      playButton.isEnabled = true
+      
+      recButton.setTitle("Record", for: .normal)
+      recorder.stop()
+    }
+    
   }
   
   
+  //MARK: EZAudioPlayer delegate methods
+  
+  func audioPlayer(_ audioPlayer: EZAudioPlayer!, playedAudio buffer: UnsafeMutablePointer<UnsafeMutablePointer<Float>?>!, withBufferSize bufferSize: UInt32, withNumberOfChannels numberOfChannels: UInt32, in audioFile: EZAudioFile!) {
+    DispatchQueue.main.async {
+      self.playAudioPlot.updateBuffer(buffer.pointee, withBufferSize: bufferSize)
+      print(buffer.pointee?.pointee.binade)
+    }
+  }
+  
+  func audioPlayer(_ audioPlayer: EZAudioPlayer!, reachedEndOf audioFile: EZAudioFile!) {
+    if playButton.isEnabled == false {
+      playButton.isEnabled = true
+    }
+  }
   
   
+  //MARK: Utility
+  
+  static func URLforRecord() -> URL{
+    let fileManager = FileManager.default
+    let urls = fileManager.urls(for: .documentDirectory, in: .userDomainMask)
+    let documentDirectory = urls[0] as NSURL
+    let soundURL = documentDirectory.appendingPathComponent("demo")
+    
+    return soundURL!
+  }
 }
-
