@@ -23,7 +23,7 @@
 		80124DFB1E251A4800438F3C /* EZPlot.m in Sources */ = {isa = PBXBuildFile; fileRef = 80124DE91E251A4800438F3C /* EZPlot.m */; };
 		80124DFC1E251A4800438F3C /* EZRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 80124DEB1E251A4800438F3C /* EZRecorder.m */; };
 		80124DFD1E251A4800438F3C /* TPCircularBuffer.c in Sources */ = {isa = PBXBuildFile; fileRef = 80124DEC1E251A4800438F3C /* TPCircularBuffer.c */; };
-		8043F8DF1E2170DA00F8E19A /* AKAudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8043F8DE1E2170DA00F8E19A /* AKAudioRecorder.swift */; };
+		8043F8DF1E2170DA00F8E19A /* AudioRecorderWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8043F8DE1E2170DA00F8E19A /* AudioRecorderWrapper.swift */; };
 		8083C47F1E24A350001EA136 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8083C47E1E24A350001EA136 /* ViewController.swift */; };
 		80B1E4F21E1E86D80018CF4F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B1E4F11E1E86D80018CF4F /* AppDelegate.swift */; };
 		80B1E4F71E1E86D80018CF4F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 80B1E4F51E1E86D80018CF4F /* Main.storyboard */; };
@@ -68,7 +68,7 @@
 		80124DEB1E251A4800438F3C /* EZRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EZRecorder.m; sourceTree = "<group>"; };
 		80124DEC1E251A4800438F3C /* TPCircularBuffer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = TPCircularBuffer.c; sourceTree = "<group>"; };
 		80124DED1E251A4800438F3C /* TPCircularBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPCircularBuffer.h; sourceTree = "<group>"; };
-		8043F8DE1E2170DA00F8E19A /* AKAudioRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKAudioRecorder.swift; sourceTree = "<group>"; };
+		8043F8DE1E2170DA00F8E19A /* AudioRecorderWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioRecorderWrapper.swift; sourceTree = "<group>"; };
 		8083C47E1E24A350001EA136 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		80B1E4EE1E1E86D80018CF4F /* TinyRecord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TinyRecord.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		80B1E4F11E1E86D80018CF4F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -157,7 +157,7 @@
 				80B1E4FD1E1E86D80018CF4F /* LaunchScreen.storyboard */,
 				80B1E5001E1E86D80018CF4F /* Info.plist */,
 				80B1E4F81E1E86D80018CF4F /* soundRecord.xcdatamodeld */,
-				8043F8DE1E2170DA00F8E19A /* AKAudioRecorder.swift */,
+				8043F8DE1E2170DA00F8E19A /* AudioRecorderWrapper.swift */,
 				80124DCB1E2519D100438F3C /* soundRecord-Bridging-Header.h */,
 				80798E9A1E25246800E132D8 /* ezaudio */,
 			);
@@ -240,7 +240,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				80124DFD1E251A4800438F3C /* TPCircularBuffer.c in Sources */,
-				8043F8DF1E2170DA00F8E19A /* AKAudioRecorder.swift in Sources */,
+				8043F8DF1E2170DA00F8E19A /* AudioRecorderWrapper.swift in Sources */,
 				80124DFA1E251A4800438F3C /* EZOutput.m in Sources */,
 				80124DF41E251A4800438F3C /* EZAudioFloatData.m in Sources */,
 				80B1E4FA1E1E86D80018CF4F /* soundRecord.xcdatamodeld in Sources */,

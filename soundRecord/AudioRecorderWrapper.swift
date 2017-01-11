@@ -1,15 +1,11 @@
-
-//  AKAudioRecorder.swift
-
-//  AudioKit
-
+//
+//  secViewController.swift
+//  soundRecord
+//
+//  Created by Alexey Savchenko on 09.01.17.
+//  Copyright © 2017 Alexey Savchenko. All rights reserved.
 //
 
-//  Created by Aurelius Prochazka on 2/9/16.
-
-//  Copyright © 2016 AudioKit. All rights reserved.
-
-//
 
 import Foundation
 
@@ -17,15 +13,11 @@ import AVFoundation
 
 
 
-/// Simple audio recorder class
 
-public class AKAudioRecorder {
-  
-  
+
+public class AudioRecorder {
   
   var internalRecorder: AVAudioRecorder
-  
-  
   
   /// Initialize the recorder
   
