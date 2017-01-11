@@ -17,7 +17,9 @@ class ViewController: UIViewController, EZAudioPlayerDelegate {
   var player = EZAudioPlayer()
   var recorder = AudioRecorder("demo")
   
-  var tempStorageOfGraphData = [Float]()
+  
+  var tempDataArray = [Float]()
+  var arrayForJSON = [[String: Float]]()
 
   //MARK: Outlets
   @IBOutlet weak var recButton: UIButton!
@@ -60,7 +62,8 @@ class ViewController: UIViewController, EZAudioPlayerDelegate {
     let audiofile = EZAudioFile(url: ViewController.URLforRecord())
     
     //Reseting temporary storage before playback
-    self.tempStorageOfGraphData = []
+    self.arrayForJSON = []
+    self.tempDataArray = []
     
     self.player.playAudioFile(audiofile)
   }
@@ -96,9 +99,10 @@ class ViewController: UIViewController, EZAudioPlayerDelegate {
     DispatchQueue.main.async {
       self.playAudioPlot.updateBuffer(buffer.pointee, withBufferSize: bufferSize)
       
+      
       //Storing audiofile buffer values to temporary storage
       if let bufferValue = buffer.pointee?.pointee{
-        self.tempStorageOfGraphData.append(bufferValue)
+        self.tempDataArray.append(bufferValue)
       }
     }
   }
@@ -108,6 +112,14 @@ class ViewController: UIViewController, EZAudioPlayerDelegate {
     DispatchQueue.main.async {
       if self.playButton.isEnabled == false {
         self.playButton.isEnabled = true
+      }
+      
+      //Prepare array of X: Y values
+      for (index, value) in self.tempDataArray.enumerated(){
+        var tempDictionary = [String: Float]()
+        tempDictionary[String(index)] = value
+        
+        self.arrayForJSON.append(tempDictionary)
       }
       
       self.createJSONFile()
@@ -144,9 +156,8 @@ class ViewController: UIViewController, EZAudioPlayerDelegate {
     
     do {
       //Create JSON data varieble from array with graph values
-      let jsonData = try JSONSerialization.data(withJSONObject: self.tempStorageOfGraphData, options: .prettyPrinted)
-      print(jsonData)
-      
+      let jsonData = try JSONSerialization.data(withJSONObject: self.arrayForJSON, options: .prettyPrinted)
+    
       //Write JSON data to file created
       try jsonData.write(to: jsonURL)
       
